@@ -3,13 +3,15 @@
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  height: 10vmin;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+  .App-logo:hover {
+    animation: App-logo-spin infinite 2s linear;
   }
 }
 
@@ -35,4 +37,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* mis estilos */
+
+.btnCampo{
+  height: 2rem;
+  width: 2rem;
+}
+
+.divTexto{
+  padding: 1rem;
 }
