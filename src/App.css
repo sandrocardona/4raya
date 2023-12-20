@@ -49,3 +49,9 @@
 .divTexto{
   padding: 1rem;
 }
+
+.btnTurno{
+  height: 3rem;
+  width: 3rem;
+  border-radius: 10px;
+}

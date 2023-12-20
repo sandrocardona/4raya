@@ -12,13 +12,19 @@ const MapaBotones = (props)=>{
   for(let i=0; i<props.campo.length; i++){
     let fila=[]
     for(let j=0; j<props.campo[i].length; j++){
-      fila.push(<Button color={props.campo[i][j]} outline className='btnCampo'/>);
+      fila.push(<Button key={i + " " + j} color={props.campo[i][j]} outline onClick={() => props.click(i, j)} className='btnCampo'/>);
     }
     lista.push(<Row><Col>{fila}</Col></Row>)
 
   }
 
   return(lista)
+}
+
+const BotonTurno = (props) => {
+  return(
+  <Button className='btnTurno' color={props.color}>{props.players} </Button>
+  )
 }
 
 class App extends Component {
@@ -29,8 +35,26 @@ class App extends Component {
       filas:9,
       columnas:9,
       listaColores:["danger","primary"],
-      turno:"azul",
+      turno: "azul",
+      players:["x","o"],
     }
+  }
+
+  cambiaTurno(){
+    let t = this.state.turno;
+
+    if(t==="azul"){
+       t = "rojo"
+    }else{
+       t = "azul"
+    }
+    this.setState({turno:t})
+  }
+
+  click(i, j){
+    console.log(i, j);
+    console.log(this.state.turno)
+    this.cambiaTurno();
   }
 
   componentWillMount() {
@@ -52,20 +76,20 @@ class App extends Component {
     this.setState({campo:matrizAux})
   }
 
-
   render(){
     return (
       <div className="App">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>Cuatro en rayas</h1>
           <div className='divCampo'>
-            <MapaBotones campo={this.state.campo}/>
+            <MapaBotones cambiaTurno={()=>this.cambiaTurno()} click={(x,y)=>this.click(x,y)} campo={this.state.campo}/>
           </div>
           <div className='divTexto'>
-            <h2>Turno de: {this.state.turno}</h2>
+            <h2>Turno {this.state.turno}</h2>
+            <BotonTurno color={this.state.listaColores[0]} players={this.state.players[0]}></BotonTurno>
+            {" "}
+            <BotonTurno color={this.state.listaColores[1]} players={this.state.players[1]}></BotonTurno>
           </div>
-          
-
       </div>
     );
   }
